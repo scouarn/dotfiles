@@ -1,1 +1,0 @@
-/home/scouarn/sync/.vim
