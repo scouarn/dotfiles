@@ -16,7 +16,7 @@ colortest () {
 [[ $- != *i* ]] && return
 
 
-# Prompt my username in red if working though ssh
+# Prompt my username in red if working through ssh
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     prompt_color=31
 else

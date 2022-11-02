@@ -22,8 +22,7 @@ set clipboard=unnamedplus
 "numbering
 set relativenumber
 set number
-set cursorline
-set cursorlineopt=number
+set cursorlineopt=line
 
 "tabs
 set tabstop=4
@@ -32,7 +31,7 @@ set expandtab
 set list
 set listchars=tab:\ \ │,space:·,extends:»,precedes:«,nbsp:␣
 
-"80 cols wide 
+" ruler at 80 cols 
 set colorcolumn=81
 
 set nobackup
@@ -46,7 +45,10 @@ set wildmenu
 set wildmode=list:longest
 set wildignore=*.o,*.exe,*.pyc,*.cmo,*.cmx,*.cmi,*.cma
 
-"status line
+
+"""""""""""""""""""""""""""""""""""""""
+"             STATUS LINE             "
+"""""""""""""""""""""""""""""""""""""""
 let g:currentmode={
        \ 'n'       : 'NORMAL ',
        \ 'v'       : 'VISUAL ',
@@ -76,14 +78,25 @@ function! Syn()
 endfunction
 command! -nargs=0 Syn call Syn()
 
-"netrw 
-let g:netrw_banner=0
 
-"remaps 
+"""""""""""""""""""""""""""""""""""""""
+"               REMAPS                "
+"""""""""""""""""""""""""""""""""""""""
 let mapleader = " "
+
+"un-highlight
 nnoremap <leader>h :noh<cr>
+
+"show directory on the left
+let g:netrw_banner=0
 nnoremap <leader>pv :wincmd v <bar> :Ex <bar> :vertical resize 16<cr>
+
+"set background
 nnoremap <leader>bgl :set bg=light<cr>
 nnoremap <leader>bgd :set bg=dark <cr>
 
+"toggle cursor line/column
+nnoremap <leader>cc :set cursorcolumn!<cr>:set cursorline!<cr>
 
+"reload colors
+nnoremap <leader>rc :set cursorcolumn!<cr>:set cursorline!<cr>
