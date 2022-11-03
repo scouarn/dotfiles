@@ -24,7 +24,7 @@ font:
   bold_italic:
     family: ubuntu mono
     style: Bold Italic
-  size: 24
+  size: 22
 #draw_bold_text_with_bright_colors: true
 
 colors:
@@ -40,14 +40,14 @@ colors:
     red:     '0xd7005f'
     #green:   '0x4cd24c'
     green:   '0x43f343'
-    yellow:  '0xe8ea40'
+    yellow:  '0xe8ea2e'
     blue:    '0x5c5cff'
     magenta: '0xaf5fff'
     cyan:    '0x00cdcd'
     white:   '0x7f7f7f'
 
   bright:
-    black:   '0x4d4d4d'
+    black:   '0x444444'
     red:     '0xff0000'
     green:   '0x00ff00'
     yellow:  '0xffff00'
