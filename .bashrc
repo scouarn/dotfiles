@@ -29,8 +29,7 @@ PS1="\[\033[01;${prompt_color}m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ 
 alias mycfg='/usr/bin/git --git-dir=$HOME/.mycfg/ --work-tree=$HOME'
 
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias egrep='grep -E'
 
 alias ls='ls --color=auto -CFh'
 alias ll='ls -Al'
