@@ -13,7 +13,7 @@ let g:colors_name="scouarn"
 hi Normal       ctermfg=15      ctermbg=none    cterm=none
 hi Comment      ctermfg=7
 hi Delimiter    ctermfg=7
-hi SpecialKey   ctermfg=238     ctermbg=none   cterm=none
+hi SpecialKey   ctermfg=8       ctermbg=none   cterm=none
 
 hi CursorColumn                 ctermbg=8      cterm=none
 hi CursorLine                   ctermbg=8      cterm=none
@@ -56,17 +56,15 @@ hi link ErrorMsg Error
 
 "search
 hi clear Search
-hi Search       ctermfg=3       ctermbg=none   cterm=reverse
-
-
-hi clear Title
-hi link  Title Normal
-hi clear MoreMsg
-hi link MoreMsg ModeMsg
+hi Search       ctermfg=11      ctermbg=none   cterm=reverse
 
 "messages TODO et FIXME
-hi Todo         ctermfg=11      ctermbg=none   cterm=reverse
+hi Todo         ctermfg=3       ctermbg=none   cterm=reverse
 
+"hi clear Title
+"hi link  Title Normal
+"hi clear MoreMsg
+"hi link MoreMsg ModeMsg
 
 "fixes for javascript
 hi link javaScriptNumber Number
