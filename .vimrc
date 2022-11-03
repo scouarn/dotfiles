@@ -11,6 +11,13 @@ au BufRead,BufNewFile *.pl set filetype=prolog
 
 au FileType * set formatoptions=rtco
 
+"Abort when accidentally saving '<' on azerty keyboard
+au BufWritePre < throw 'Abort saving "<"'
+
+"wrapping
+set wrap
+set linebreak
+
 "custom colorscheme
 colorscheme scouarn
 set background=dark
@@ -35,7 +42,6 @@ set listchars=tab:\ \ │,space:·,extends:»,precedes:«,nbsp:␣
 set colorcolumn=81
 
 set nobackup
-set nowrap
 set incsearch
 set showmatch
 set hlsearch
