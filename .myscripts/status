@@ -10,7 +10,7 @@ while true; do
     ROOT=$(df -h | awk '{if ($6 == "/"    ) {print $6,$4}}')
 
     # RAM
-    FREE=$(free -h | tail -1 | awk '{print $3"/"$2}')
+    FREE=$(free -th | tail -1 | awk '{print $3"/"$2}')
 
     # CPU
     # FIXME: average since boot
