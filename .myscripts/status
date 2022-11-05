@@ -11,9 +11,10 @@ ROOT=$(df -h | awk '{if ($6 == "/"    ) {print $6,$4}}')
 # RAM
 FREE=$(free -th | tail -1 | awk '{print $3"/"$2}')
 
-# CPU
-# FIXME: average since boot
-CPU_IDLE=$(vmstat | tail -1 | awk '{print $15}')
+# CPU 
+# NOTE: vmstat     -> average since boot
+#       vmstat 1 2 -> average over a second (adds a 1s delay)
+CPU_IDLE=$(vmstat 1 2 | tail -1 | awk '{print $15}')
 CPU_USAGE=$((100 - $CPU_IDLE))
 
 # Network
@@ -24,9 +25,9 @@ if [ -x '/usr/bin/acpi' ]; then
     ACPI=$(acpi)
     BATT_STATUS=$(echo "$ACPI" | sed -n 's/^[^:]*:\s*\([^,]*\),.*$/\1/p')
     BATT_PERC=$(echo "$ACPI"   | awk -F ',' '{printf "%d",$2}')
-    BATT_TIME=$(echo "$ACPI"   | awk -F ',' '{print $3}' | awk '{print $1}')
+    BATT_TIME=$(echo "$ACPI"   | awk -F ',' '{print $3}')
 
-    if [ -n $BATT_TIME ]; then
+    if [ -n "$BATT_TIME" ]; then
         BATT_TIME=$(echo $BATT_TIME | awk -F ':' '{printf "%dh%02d",$1,$2}')
     fi 
 
@@ -48,8 +49,9 @@ if [ -x '/usr/bin/acpi' ]; then
 fi
 
 # Time
+# NOTE: Omitting seconds because of lag
 DATE=$(date +'%a %d %b')
-TIME=$(date +'%H:%M:%S')
+TIME=$(date +'%H:%M') #'%H:%M:%S'
 
 
 # Composing the status line
@@ -65,7 +67,10 @@ if [ -n "$NET" ]; then
 fi
 
 if [ -n "$BATT_ICON" ]; then
-    OUT="$OUT$SEP$BATT_ICON $BATT_PERC% $BATT_TIME"
+    OUT="$OUT$SEP$BATT_ICON $BATT_PERC%"
+    if [ -n "$BATT_TIME" ]; then
+        OUT="$OUT $BATT_TIME"
+    fi
 fi
 
 OUT="$OUT$SEP$DATE $TIME "
