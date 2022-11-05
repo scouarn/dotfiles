@@ -1,0 +1,72 @@
+#!/usr/bin/sh
+
+# Status line script
+# Uses nerd font
+
+while true; do
+
+    # Disks
+    HOME=$(df -h | awk '{if ($6 == "/home") {print $6,$4}}')
+    ROOT=$(df -h | awk '{if ($6 == "/"    ) {print $6,$4}}')
+
+    # RAM
+    FREE=$(free -h | tail -1 | awk '{print $3"/"$2}')
+
+    # CPU
+    # FIXME: average since boot
+    CPU_IDLE=$(vmstat | tail -1 | awk '{print $15}')
+    CPU_USAGE=$((100 - $CPU_IDLE))
+
+    # Network
+    NET=$(nmcli device | awk '{if ($2 == "wifi") {print $4}}')
+
+    # Power
+    if [ -x '/usr/bin/acpi' ]; then
+        ACPI=$(acpi | tr ',' ' ')
+        BATT_STATUS=$(echo "$ACPI" | awk '{print $3}')
+        BATT_PERC=$(echo "$ACPI"   | awk '{print $4}')
+        BATT_TIME=$(echo "$ACPI"   | awk '{print $5}')
+
+        if [ "$BATT_STATUS" = 'Charging' ]; then
+            BATT_ICON=''
+        else case "$((BATT_PERC / 10))" in
+          0|1 ) BATT_ICON='';;
+            2 ) BATT_ICON='';;
+            3 ) BATT_ICON='';;
+            4 ) BATT_ICON='';;
+            5 ) BATT_ICON='';;
+            6 ) BATT_ICON='';;
+            7 ) BATT_ICON='';;
+            8 ) BATT_ICON='';;
+            9 ) BATT_ICON='';;
+           10 ) BATT_ICON='';;
+        esac fi
+    fi
+
+    # Time
+    DATE=$(date +'%a %d %b')
+    TIME=$(date +'%H:%M:%S')
+
+
+    # Composing the status line
+    SEP=" | "
+    OUT=""
+    OUT="$OUT$SEP $ROOT"
+    OUT="$OUT$SEP $HOME"
+    OUT="$OUT$SEP$(printf %3s $CPU_USAGE)%"
+    OUT="$OUT$SEP $FREE"
+
+    if [ -n "$NET" ]; then
+        OUT="$OUT$SEP $NET"
+    fi
+
+    if [ -n "$BATT_ICON" ]; then
+        OUT="$OUT$SEP$BATT_ICON$(printf '%3s' $BATT_PERC)%"
+    fi
+
+    OUT="$OUT$SEP$DATE $TIME "
+
+    # Output
+    echo "$OUT"
+    sleep 1
+done
