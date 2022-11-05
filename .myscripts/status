@@ -60,7 +60,7 @@ if [ -n "$NET" ]; then
 fi
 
 if [ -n "$BATT_ICON" ]; then
-    OUT="$OUT$SEP$BATT_ICON$(printf '%3s' $BATT_PERC)%"
+    OUT="$OUT$SEP$BATT_ICON$(printf '%3s' $BATT_PERC)"
 fi
 
 OUT="$OUT$SEP$DATE $TIME "
