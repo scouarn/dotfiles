@@ -21,15 +21,19 @@ NET=$(nmcli device | awk '{if ($2 == "wifi") {print $4}}')
 
 # Power
 if [ -x '/usr/bin/acpi' ]; then
-    ACPI=$(acpi | tr ',' ' ')
-    BATT_STATUS=$(echo "$ACPI" | awk '{print $3}')
-    BATT_PERC=$(echo "$ACPI"   | awk '{print $4}')
-    BATT_TIME=$(echo "$ACPI"   | awk '{print $5}')
+    ACPI=$(acpi)
+    BATT_STATUS=$(echo "$ACPI" | sed -n 's/^[^:]*:\s*\([^,]*\),.*$/\1/p')
+    BATT_PERC=$(echo "$ACPI"   | awk -F ',' '{printf "%d",$2}')
+    BATT_TIME=$(echo "$ACPI"   | awk -F ',' '{print $3}' | awk '{print $1}')
+
+    if [ -n $BATT_TIME ]; then
+        BATT_TIME=$(echo $BATT_TIME | awk -F ':' '{printf "%dh%02d",$1,$2}')
+    fi 
 
     if [ "$BATT_STATUS" = 'Charging' ]; then
         BATT_ICON=''
     else case "$((BATT_PERC / 10))" in
-      0|1 ) BATT_ICON='';;
+        1 ) BATT_ICON='';;
         2 ) BATT_ICON='';;
         3 ) BATT_ICON='';;
         4 ) BATT_ICON='';;
@@ -39,6 +43,7 @@ if [ -x '/usr/bin/acpi' ]; then
         8 ) BATT_ICON='';;
         9 ) BATT_ICON='';;
        10 ) BATT_ICON='';;
+        * ) BATT_ICON='';;
     esac fi
 fi
 
@@ -52,7 +57,7 @@ SEP=" | "
 OUT=""
 OUT="$OUT$SEP $ROOT"
 OUT="$OUT$SEP $HOME"
-OUT="$OUT$SEP$(printf %3s $CPU_USAGE)"
+OUT="$OUT$SEP $CPU_USAGE%"
 OUT="$OUT$SEP $FREE"
 
 if [ -n "$NET" ]; then
@@ -60,7 +65,7 @@ if [ -n "$NET" ]; then
 fi
 
 if [ -n "$BATT_ICON" ]; then
-    OUT="$OUT$SEP$BATT_ICON$(printf '%3s' $BATT_PERC)"
+    OUT="$OUT$SEP$BATT_ICON $BATT_PERC% $BATT_TIME"
 fi
 
 OUT="$OUT$SEP$DATE $TIME "
