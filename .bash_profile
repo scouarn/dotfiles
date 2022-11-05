@@ -17,8 +17,12 @@ if [ -f "$HOME/bashrc" ]; then
     . "$HOMME/bashrc"
 fi 
 
-# Auto start X on tty1
-if [ -f "$HOME/.xinitrc" ] && [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
+# Auto WM on tty1
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
 then
-    exec startx
+    if [ -f "$HOME/.xinitrc" ]; then
+        exec startx
+    elif [ -x "$HOME/start_desktop" ]; then
+        exec "$HOME/start_desktop"
+    fi
 fi
