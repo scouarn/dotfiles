@@ -39,7 +39,7 @@ alias mv='mv -i'
 alias cp='cp -i'
 alias rm='rm -i'
 
-alias ga='git add -A'
+alias ga='git add'
 alias gc='git commit -m'
 alias gp='git push'
 alias gs='git status'

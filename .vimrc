@@ -15,7 +15,7 @@ au FileType * set formatoptions=rtco
 au BufWritePre < throw 'Abort saving "<"'
 
 "wrapping
-set wrap
+set nowrap
 set linebreak
 
 "custom colorscheme
@@ -95,14 +95,16 @@ nnoremap <leader>h :noh<cr>
 
 "show directory on the left
 let g:netrw_banner=0
-nnoremap <leader>pv :wincmd v <bar> :Ex <bar> :vertical resize 16<cr>
+"nnoremap <leader>pv :wincmd v <bar> :Ex <bar> :vertical resize 16<cr>
+"nnoremap <leader>pv :Sex! <bar> :vertical resize 20<cr>
+nnoremap <leader>pv :Ex <cr> 
 
 "set background
 nnoremap <leader>bgl :set bg=light<cr>
 nnoremap <leader>bgd :set bg=dark <cr>
 
 "toggle cursor line/column
-nnoremap <leader>cc :set cursorcolumn!<cr>:set cursorline!<cr>
+nnoremap <leader>c :set cursorcolumn!<cr>:set cursorline!<cr>
 
-"reload colors
-nnoremap <leader>rc :set cursorcolumn!<cr>:set cursorline!<cr>
+"toggle wrapping
+nnoremap <leader>w :set wrap!<cr>

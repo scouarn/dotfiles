@@ -27,6 +27,11 @@ hi VertSplit    ctermfg=8       ctermbg=none   cterm=reverse
 hi NonText ctermfg=4
 
 
+hi clear Title
+hi link  Title Normal
+hi clear MoreMsg
+hi link MoreMsg ModeMsg
+
 "red stuff
 hi Statement    ctermfg=1       cterm=bold
 hi clear Identifier
@@ -60,11 +65,6 @@ hi Search       ctermfg=11      ctermbg=none   cterm=reverse
 
 "messages TODO et FIXME
 hi Todo         ctermfg=3       ctermbg=none   cterm=reverse
-
-"hi clear Title
-"hi link  Title Normal
-"hi clear MoreMsg
-"hi link MoreMsg ModeMsg
 
 "fixes for javascript
 hi link javaScriptNumber Number
