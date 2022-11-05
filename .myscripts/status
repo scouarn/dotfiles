@@ -52,7 +52,7 @@ SEP=" | "
 OUT=""
 OUT="$OUT$SEP $ROOT"
 OUT="$OUT$SEP $HOME"
-OUT="$OUT$SEP$(printf %3s $CPU_USAGE)%"
+OUT="$OUT$SEP$(printf %3s $CPU_USAGE)"
 OUT="$OUT$SEP $FREE"
 
 if [ -n "$NET" ]; then
