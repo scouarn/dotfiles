@@ -10,8 +10,8 @@ set background=dark
 let g:colors_name="scouarn"
 
 
-hi Normal       ctermfg=15      ctermbg=none    cterm=none
-hi Comment      ctermfg=7
+hi Normal       ctermfg=15      ctermbg=none   cterm=none
+hi Comment      ctermfg=7                      cterm=italic
 hi Delimiter    ctermfg=7
 hi SpecialKey   ctermfg=8       ctermbg=none   cterm=none
 
