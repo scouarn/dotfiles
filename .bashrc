@@ -16,14 +16,12 @@ colortest () {
 [[ $- != *i* ]] && return
 
 
-# Prompt my username in red if working through ssh
+# Different prompt when working through ssh 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    prompt_color=31
+    PS1="\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ "
 else
-    prompt_color=32
+    PS1="\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ "
 fi
-# username:dir$ ...
-PS1="\[\033[01;${prompt_color}m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ "
 
 # git bare
 alias mycfg='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -45,6 +43,8 @@ alias gp='git push'
 alias gs='git status'
 alias gd='git diff'
 alias gl='git log'
+
+alias dirsize='du -sh * | sort -h'
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
