@@ -14,7 +14,7 @@ fi
 #export LIBRARY_PATH="$LIBRARY_PATH:$MYLIBS/lib"
 
 if [ -f "$HOME/.bashrc" ]; then
-    . "$HOMME/.bashrc"
+    . "$HOME/.bashrc"
 fi 
 
 # Auto WM on tty1
