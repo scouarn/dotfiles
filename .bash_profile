@@ -13,13 +13,12 @@ fi
 #export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$MYLIBS/lib"
 #export LIBRARY_PATH="$LIBRARY_PATH:$MYLIBS/lib"
 
-if [ -f "$HOME/bashrc" ]; then
-    . "$HOMME/bashrc"
+if [ -f "$HOME/.bashrc" ]; then
+    . "$HOMME/.bashrc"
 fi 
 
 # Auto WM on tty1
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
-then
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
     if [ -f "$HOME/.xinitrc" ]; then
         exec startx
     elif [ -x "$HOME/start_desktop" ]; then
