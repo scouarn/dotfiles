@@ -1,0 +1,43 @@
+#!/usr/bin/sh
+
+LIST="$HOME/.myscripts/places.list"
+
+USAGE="Usage: $0 [ <command> [args...] | --help | add [<path>] | rm ]
+    Choose a directory from a dmenu prompt to exectute a command into,
+    for instance launching a terminal.
+
+    Options:
+    --help          Print this message
+    add [<path>]    Add to the list of paths, by default the current directory
+    rm              Prompt a path to be removed from the list"
+
+prompt() {
+    cat "$LIST" | dmenu -i -l 30 -p "Places"
+}
+
+case "$1" in
+    '--help' ) echo "$USAGE";;
+    'rm' ) cat "$LIST" | grep -vxF "$(prompt)" > "$LIST";;
+
+    'add' ) 
+        if [ -z "$2" ]; then
+            DIR='.'
+        elif [ -d "$2" ]; then
+            DIR="$2"
+        else
+            echo "Invalid directory: $2" >&2
+            exit 1
+        fi
+        DIR=$(realpath "$DIR")
+
+        # Only add if not already in the list
+        LINE=$(cat "$LIST" | grep -xF "$DIR")
+        if [ -z "$LINE" ]; then
+            echo "$DIR" >> "$LIST"
+        fi
+    ;;
+
+    * ) DIR=$(prompt)
+        [ -n "$DIR" ] && (cd "$DIR"; exec $@)
+    ;;
+esac
