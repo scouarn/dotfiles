@@ -18,7 +18,7 @@ if [ -f "$HOME/.bashrc" ]; then
 fi 
 
 # Auto WM on tty1
-if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+if [ -z "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
     if [ -f "$HOME/.xinitrc" ]; then
         exec startx
     elif [ -x "$HOME/start_desktop" ]; then
