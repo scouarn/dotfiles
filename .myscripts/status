@@ -62,7 +62,7 @@ OUT="$OUT$SEP $HOME"
 OUT="$OUT$SEP $CPU_USAGE%"
 OUT="$OUT$SEP $FREE"
 
-if [ -n "$NET" ]; then
+if [ -n "$NET" ] && [ "$NET" != "--" ]; then
     OUT="$OUT$SEP $NET"
 fi
 
