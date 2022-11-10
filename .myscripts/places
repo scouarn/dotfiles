@@ -38,6 +38,6 @@ case "$1" in
     ;;
 
     * ) DIR=$(prompt)
-        [ -n "$DIR" ] && (cd "$DIR"; exec $@)
+        [ -d "$DIR" ] && (cd "$DIR"; exec $@)
     ;;
 esac
