@@ -1,0 +1,96 @@
+#===============================================================================
+# Generic Makefile
+#
+# scouarn 2022
+#===============================================================================
+
+
+#== ORGANIZATION ===============================================================
+#
+# Generated files are placed in the hierarchy of the bin directory which is 
+# automatically created. The other directories stay unchanged.
+#
+# Each main/%.c must contain a main function and gets compiled to bin/main/%.o.
+# Likewise, any source/%.c makes a bin/source/%.o. Then each bin/main/%.o gets 
+# linked with every bin/source/*.o into a bin/% executable.
+#
+# ├── bin
+# │   ├── foo (exe)
+# │   ├── bar (exe)
+# │   │
+# │   ├── main
+# │   │   ├── foo.o
+# │   │   └── bar.o
+# │   │
+# │   └── source
+# │       ├── a.o
+# │       └── b.o
+# │
+# ├── include
+# │   └── header.h
+# │
+# ├── main
+# │   ├── foo.c
+# │   └── bar.c
+# │
+# └── source
+#     ├── a.c
+#     └── b.c
+
+
+#== RULES =====================================================================
+#
+# all : generate one executable for each *.c file inside the main directory
+# clean : delete the bin directory
+#
+
+#== CONFIG =====================================================================
+
+# Names of the directories
+BIN_DIR = bin
+INC_DIR = include
+EXE_DIR = main
+SRC_DIR = source
+
+# Compilation / link flags
+CC = gcc
+CFLAGS  = -Wall -Wextra -pedantic -I$(INC_DIR) $(FLAGS)
+LDFLAGS =
+LDLIBS  =
+
+# Extra flags (Release / Debug)
+#CFLAGS += -O3
+CFLAGS += -ggdb
+
+MKDIR = mkdir -p
+
+
+#== NO NEED TO CHANGE ANYTHING BELOW ===========================================
+
+# Files from source
+SRC = $(wildcard $(SRC_DIR)/*.c)
+OBJ = $(patsubst %.c,bin/%.o,$(SRC))
+
+# Files from main
+SRC_EXE = $(wildcard $(EXE_DIR)/*.c)
+OBJ_EXE = $(patsubst %.c,$(BIN_DIR)/%.o,$(SRC_EXE))
+
+# Final executables
+EXE = $(patsubst $(EXE_DIR)/%.c,$(BIN_DIR)/%,$(SRC_EXE))
+
+.PHONY: all clean
+all : $(EXE)
+
+# Link
+$(BIN_DIR)/% : $(BIN_DIR)/$(EXE_DIR)/%.o $(OBJ)
+	@$(MKDIR) $(@D)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+# Compile
+$(BIN_DIR)/%.o : %.c
+	@$(MKDIR) $(@D)
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+clean :
+	$(RM) -r $(BIN_DIR)
+
