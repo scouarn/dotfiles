@@ -14,6 +14,9 @@ au FileType * set formatoptions=rtco
 "Abort when accidentally saving '<' on azerty keyboard
 au BufWritePre < throw 'Abort saving "<"'
 
+" By default backspace can only remove what was added after entering insert
+set backspace=indent,eol,start
+
 "wrapping
 set nowrap
 set linebreak
@@ -55,19 +58,19 @@ set wildignore=*.o,*.exe,*.pyc,*.cmo,*.cmx,*.cmi,*.cma
 """""""""""""""""""""""""""""""""""""""
 "             STATUS LINE             "
 """""""""""""""""""""""""""""""""""""""
-let g:currentmode={
-       \ 'n'       : 'NORMAL ',
-       \ 'v'       : 'VISUAL ',
-       \ 'V'       : 'VLINE  ',
-       \ "\<C-V>"  : 'VBLOCK ',
-       \ 'i'       : 'INSERT ',
-       \ 'R'       : 'REPLACE',
-       \ 'Rv'      : 'VREP   ',
-       \ 'c'       : 'COMMAND',
-       \}
+" let g:currentmode={
+"        \ 'n'       : 'NORMAL ',
+"        \ 'v'       : 'VISUAL ',
+"        \ 'V'       : 'VLINE  ',
+"        \ "\<C-V>"  : 'VBLOCK ',
+"        \ 'i'       : 'INSERT ',
+"        \ 'R'       : 'REPLACE',
+"        \ 'Rv'      : 'VREP   ',
+"        \ 'c'       : 'COMMAND',
+"        \}
 
 set statusline=
-set statusline+=\ %{g:currentmode[mode()]}
+"set statusline+=\ %{g:currentmode[mode()]}
 set statusline+=\ %f\ %Y\ 
 set statusline+=%{&modified?'[+]':'\ \ \ '}
 set statusline+=%{&readonly?'[RO]':'\ \ \ \ '}
