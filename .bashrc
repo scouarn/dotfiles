@@ -30,8 +30,8 @@ alias grep='grep --color=auto'
 alias egrep='grep -E'
 
 alias ls='ls --color=auto -CFh'
-alias ll='ls -Al'
-alias la='ls -A'
+alias ll='ls -al'
+alias la='ls -a'
 
 alias mv='mv -i'
 alias cp='cp -i'
