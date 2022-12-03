@@ -82,12 +82,12 @@ EXE = $(patsubst $(EXE_DIR)/%.c,$(BIN_DIR)/%,$(SRC_EXE))
 all : $(EXE)
 
 # Link
-$(BIN_DIR)/% : $(BIN_DIR)/$(EXE_DIR)/%.o $(OBJ)
+$(EXE) : $(BIN_DIR)/% : $(BIN_DIR)/$(EXE_DIR)/%.o $(OBJ)
 	@$(MKDIR) $(@D)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 # Compile
-$(BIN_DIR)/%.o : %.c
+$(OBJ) $(OBJ_EXE) : $(BIN_DIR)/%.o : %.c
 	@$(MKDIR) $(@D)
 	$(CC) -c $(CFLAGS) -o $@ $<
 

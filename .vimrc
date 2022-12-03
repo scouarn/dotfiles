@@ -9,13 +9,10 @@ filetype plugin on
 "fix for prolog file extension
 au BufRead,BufNewFile *.pl set filetype=prolog
 
-au FileType * set formatoptions=rtco
+au FileType * set formatoptions=
 
 "Abort when accidentally saving '<' on azerty keyboard
 au BufWritePre < throw 'Abort saving "<"'
-
-" By default backspace can only remove what was added after entering insert
-set backspace=indent,eol,start
 
 "wrapping
 set nowrap
@@ -92,6 +89,11 @@ command! -nargs=0 Syn call Syn()
 "               REMAPS                "
 """""""""""""""""""""""""""""""""""""""
 let mapleader = " "
+
+" By default backspace can only remove what was added after entering insert
+set backspace=indent,eol,start
+set mouse=a
+set ttymouse=sgr
 
 "un-highlight
 nnoremap <leader>h :noh<cr>
