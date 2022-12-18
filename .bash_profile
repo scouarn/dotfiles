@@ -3,10 +3,15 @@ if [ -d "$HOME/.local/bin" ]; then
     export PATH="$PATH:$HOME/.local/bin"
 fi
 
-
 if [ -d "$HOME/.myscripts" ]; then
     export PATH="$PATH:$HOME/.myscripts"
 fi
+
+# ocaml
+if [ -d "$HOME/.opam" ]; then
+    eval $(opam env)
+fi
+
 
 #export MYLIBS="/home/scouarn/mylibs"
 #export C_INCLUDE_PATH="$C_INCLUDE_PATH:$MYLIBS/include"
