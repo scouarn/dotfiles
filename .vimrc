@@ -138,3 +138,6 @@ nnoremap N Nzz
 "move the selection up or down and reindent
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+"paste without saving to register
+noremap <C-p> "_dP
