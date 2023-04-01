@@ -31,6 +31,7 @@ PLACES_MENU="fzf"
 #PLACES_MENU="rofi"
 #PLACES_MENU="dmenu -i -l 30 -p Places"
 source "$HOME/.myscripts/places.sh"
+alias pl="places"
 
 # grep
 alias grep='grep --color=auto'

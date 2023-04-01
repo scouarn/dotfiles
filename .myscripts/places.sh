@@ -3,7 +3,7 @@
 # Directory bookmarks (cd with a fuzzy finder)
 #
 # Usage:
-# pl                    Prompt and cd
+# places                Prompt and cd
 # places_prompt         Prompt and echo the selected path
 # places_add [<path>]   Add to the list of paths, defaults to the current working directory
 # places_rm             Prompt and remove from the list
@@ -19,28 +19,29 @@ if [ -z "$PLACES_MENU" ]; then
     PLACES_MENU="fzf"
 fi
 
-alias pl="eval cd \$(places_prompt)"
+places() {
+    cd $(places_prompt)
+}
 
 places_prompt() {
     cat "$PLACES_LIST" | $PLACES_MENU
 }
 
 places_add() {
-    if [ -z "$2" ]; then
+    if [ -z "$1" ]; then
         DIR='.'
     elif [ -d "$2" ]; then
-        DIR="$2"
+        DIR="$1"
     else
-        echo "Invalid directory: $2" >&2
+        echo "Invalid directory: $1" >&2
         exit 1
     fi
+
     DIR=$(realpath "$DIR")
 
-    # Only add if not already in the list
-    LINE=$(cat "$LIST" | grep -xF "$DIR")
-    if [ -z "$LINE" ]; then
-        echo "$DIR" >> "$PLACES_LIST"
-    fi
+    # Add and remove duplicates
+    echo "$DIR" >> "$PLACES_LIST"
+    sort -u "$PLACES_LIST" -o "$PLACES_LIST"
 }
 
 places_rm() {
