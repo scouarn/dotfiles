@@ -141,3 +141,6 @@ vnoremap K :m '<-2<CR>gv=gv
 
 "paste without saving to register
 noremap <C-p> "_dP
+
+"toggle tab expension
+noremap <leader>t :set expandtab!<cr>
