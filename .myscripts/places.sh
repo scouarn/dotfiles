@@ -31,11 +31,10 @@ places_prompt() {
 places_add() {
     if [ -z "$1" ]; then
         DIR='.'
-    elif [ -d "$2" ]; then
+    elif [ -d "$1" ]; then
         DIR="$1"
     else
         echo "Invalid directory: $1" >&2
-        exit 1
     fi
 
     DIR=$(realpath "$DIR")
@@ -46,5 +45,5 @@ places_add() {
 }
 
 places_rm() {
-    cat "$LIST" | grep -vxF "$(places_prompt)" > "$PLACES_LIST"
+    cat "$PLACES_LIST" | grep -vxF "$(places_prompt)" > "$PLACES_LIST"
 }
