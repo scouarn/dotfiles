@@ -20,7 +20,8 @@ if [ -z "$PLACES_MENU" ]; then
 fi
 
 places() {
-    cd $(places_prompt)
+    DIR=$(places_prompt)
+    [ -d "$DIR" ] && cd "$DIR"
 }
 
 places_prompt() {
