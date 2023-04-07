@@ -58,6 +58,9 @@ alias gl='git log'
 # Echo dirs by size
 alias dirsize='du -sh * | sort -h'
 
+# Run make with the correct number of CPUs
+alias makej="make -j$(nproc)"
+
 # Colors in gcc errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
